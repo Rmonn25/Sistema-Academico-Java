@@ -158,43 +158,27 @@ gui.java
 
 # 🖼️ Imagens do Projeto
 
-## Tela Principal
-
-```md
-![Tela Principal](imagens/tela-principal.png)
-```
-
----
-
 ## Cadastro de Alunos
 
-```md
-![Cadastro de Alunos](imagens/cadastro-aluno.png)
-```
+![Tela Principal](https://raw.githubusercontent.com/Rmonn25/Sistema-Academico-Java/main/imagens/Tela%20Principal.png)
 
 ---
 
 ## Consulta de Alunos
 
-```md
-![Consulta de Alunos](imagens/consulta-aluno.png)
-```
+![Consultar Aluno](https://raw.githubusercontent.com/Rmonn25/Sistema-Academico-Java/main/imagens/Consultar%20Aluno.png)
 
 ---
 
 ## Cadastro de Notas
 
-```md
-![Cadastro de Notas](imagens/notas.png)
-```
+![Cadastro de Notas](https://raw.githubusercontent.com/Rmonn25/Sistema-Academico-Java/main/imagens/Cadastro%20de%20notas.png)
 
 ---
 
 ## Boletim Acadêmico
 
-```md
-![Boletim](imagens/boletim.png)
-```
+![Boletim de Notas](https://raw.githubusercontent.com/Rmonn25/Sistema-Academico-Java/main/imagens/Boletim%20de%20Notas.png)
 
 ---
 
