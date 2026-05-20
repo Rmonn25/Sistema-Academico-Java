@@ -13,18 +13,20 @@ import javax.swing.DefaultComboBoxModel;
 import sistemaacademico.Aluno;
 import sistemaacademico.DAO.AlunoDAO;
 
+// Tela responsável por alterar os dados cadastrais de um aluno
 public class TelaAlterarAluno extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	public TelaAlterarAluno() {
 
+		// Configurações principais da janela
 		setTitle("Alterar Aluno");
 		setBounds(150, 150, 720, 430);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		// Campos dos dados dos alunos
+		// Campo usado para buscar o aluno pelo RGM ou CPF
 		Label lblBusca = new Label("RGM ou CPF");
 		lblBusca.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblBusca.setBounds(20, 20, 90, 25);
@@ -35,14 +37,17 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Busca.setBounds(120, 20, 180, 28);
 		getContentPane().add(Text_Busca);
 
+		// Botão responsável por buscar os dados do aluno
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(320, 20, 100, 28);
 		getContentPane().add(btnBuscar);
 
+		// Botão responsável por salvar as alterações realizadas
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.setBounds(440, 20, 100, 28);
 		getContentPane().add(btnAlterar);
 
+		// Campo RGM
 		Label lblRgm = new Label("RGM");
 		lblRgm.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblRgm.setBounds(20, 65, 90, 25);
@@ -53,6 +58,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Rgm.setBounds(120, 65, 160, 28);
 		getContentPane().add(Text_Rgm);
 
+		// Campo nome
 		Label lblNome = new Label("Nome");
 		lblNome.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblNome.setBounds(20, 100, 90, 25);
@@ -63,6 +69,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Nome.setBounds(120, 100, 500, 28);
 		getContentPane().add(Text_Nome);
 
+		// Campo data de nascimento
 		Label lblDataNasc = new Label("Data Nasc.");
 		lblDataNasc.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblDataNasc.setBounds(20, 135, 90, 25);
@@ -73,6 +80,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_DataNasc.setBounds(120, 135, 160, 28);
 		getContentPane().add(Text_DataNasc);
 
+		// Campo CPF
 		Label lblCpf = new Label("CPF");
 		lblCpf.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblCpf.setBounds(334, 135, 60, 25);
@@ -83,6 +91,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Cpf.setBounds(400, 135, 180, 28);
 		getContentPane().add(Text_Cpf);
 
+		// Campo email
 		Label lblEmail = new Label("Email");
 		lblEmail.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblEmail.setBounds(20, 170, 90, 25);
@@ -93,6 +102,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Email.setBounds(120, 170, 500, 28);
 		getContentPane().add(Text_Email);
 
+		// Campo endereço
 		Label lblEndereco = new Label("Endereço");
 		lblEndereco.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblEndereco.setBounds(20, 205, 90, 25);
@@ -103,6 +113,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Endereco.setBounds(120, 205, 500, 28);
 		getContentPane().add(Text_Endereco);
 
+		// Campo município
 		Label lblMunicipio = new Label("Município");
 		lblMunicipio.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblMunicipio.setBounds(20, 240, 90, 25);
@@ -113,6 +124,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Municipio.setBounds(120, 240, 200, 28);
 		getContentPane().add(Text_Municipio);
 
+		// Campo UF
 		Label lblUf = new Label("UF");
 		lblUf.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblUf.setBounds(334, 240, 40, 25);
@@ -123,6 +135,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Uf.setBounds(380, 240, 60, 28);
 		getContentPane().add(Text_Uf);
 
+		// Campo celular
 		Label lblCelular = new Label("Celular");
 		lblCelular.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblCelular.setBounds(460, 240, 60, 25);
@@ -133,6 +146,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Celular.setBounds(520, 240, 130, 28);
 		getContentPane().add(Text_Celular);
 
+		// ComboBox para selecionar o curso do aluno
 		Label lblCurso = new Label("Curso");
 		lblCurso.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblCurso.setBounds(20, 275, 90, 25);
@@ -145,6 +159,7 @@ public class TelaAlterarAluno extends JFrame {
 		comboBox_Curso.setBounds(120, 275, 360, 28);
 		getContentPane().add(comboBox_Curso);
 
+		// Campo campus
 		Label lblCampus = new Label("Campus");
 		lblCampus.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblCampus.setBounds(20, 310, 90, 25);
@@ -155,6 +170,7 @@ public class TelaAlterarAluno extends JFrame {
 		Text_Campus.setBounds(120, 310, 180, 28);
 		getContentPane().add(Text_Campus);
 
+		// ComboBox para selecionar o período do aluno
 		Label lblPeriodo = new Label("Período");
 		lblPeriodo.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblPeriodo.setBounds(320, 310, 90, 25);
@@ -166,8 +182,8 @@ public class TelaAlterarAluno extends JFrame {
 		comboBox_Periodo.setBounds(420, 310, 120, 28);
 		getContentPane().add(comboBox_Periodo);
 
-		// Botão apra buscar os dados
-
+		// Ação do botão Buscar
+		// Busca o aluno pelo RGM ou CPF e preenche os campos da tela
 		btnBuscar.addActionListener(e -> {
 
 			String busca = Text_Busca.getText().trim();
@@ -195,7 +211,8 @@ public class TelaAlterarAluno extends JFrame {
 			}
 		});
 
-		// Botão para alterar os dados
+		// Ação do botão Alterar
+		// Cria um objeto Aluno com os dados modificados e envia para o DAO atualizar no banco
 		btnAlterar.addActionListener(e -> {
 
 			Aluno aluno = new Aluno(Text_Rgm.getText().trim(), Text_Nome.getText().trim(),

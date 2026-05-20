@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -37,11 +38,13 @@ import sistemaacademico.Telas.TelaAlterarAluno;
 import sistemaacademico.Telas.TelaConsultaExcluirAluno;
 import sistemaacademico.Telas.TelaConsultaExcluirNotas;
 
+//Classe principal da interface gráfica do sistema acadêmico
 public class Gui extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	
+	// Método principal responsável por iniciar a aplicação
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,14 +57,17 @@ public class Gui extends JFrame {
 			}
 		});
 	}
-
+	
+	// Construtor da tela principal
+	// Aqui são criados os menus, abas, campos e botões do sistema
 	public Gui() throws Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 635, 395);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-
+		
+		// Menu Aluno
 		JMenu mnNewMenu = new JMenu("Aluno");
 		menuBar.add(mnNewMenu);
 
@@ -86,7 +92,8 @@ public class Gui extends JFrame {
 		});
 		mntmNewMenuItem_4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_DOWN_MASK));
 		mnNewMenu.add(mntmNewMenuItem_4);
-
+		
+		// Menu Notas e Faltas
 		JMenu mnNewMenu_1 = new JMenu("Notas e Faltas");
 		menuBar.add(mnNewMenu_1);
 
@@ -115,7 +122,10 @@ public class Gui extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(10, 27, 599, 293);
 		contentPane.add(tabbedPane);
-
+		
+		// ABA dados pessoais
+		// Campos utilizados para cadastrar os dados básicos do aluno
+		
 		JPanel dados_pessoais = new JPanel();
 		tabbedPane.addTab("Dados Pessoais", null, dados_pessoais, null);
 		dados_pessoais.setLayout(null);
@@ -209,7 +219,10 @@ public class Gui extends JFrame {
 		Text_Celular.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		Text_Celular.setBounds(418, 219, 156, 28);
 		dados_pessoais.add(Text_Celular);
-
+		
+		// Aba curso
+		// Campos utilizados para selecionar curso, campus e período do aluno
+		
 		JPanel curso = new JPanel();
 		tabbedPane.addTab("Curso", null, curso, null);
 		curso.setLayout(null);
@@ -261,7 +274,10 @@ public class Gui extends JFrame {
 				"Ciência da Computação", "Engenharia de Software", "Gestão de TI" }));
 		comboBox_Curso.setBounds(90, 13, 444, 28);
 		curso.add(comboBox_Curso);
-
+		
+		// Aba boletim
+		// Exibe o boletim do aluno com disciplinas, semestre, notas e faltas
+		
 		JPanel notas_e_faltas = new JPanel();
 		tabbedPane.addTab("Notas e Faltas", null, notas_e_faltas, null);
 		notas_e_faltas.setLayout(null);
@@ -427,9 +443,24 @@ public class Gui extends JFrame {
 		JTable tabelaBoletim = new JTable(modeloBoletim);
 		tabelaBoletim.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tabelaBoletim.setRowHeight(24);
+		
+		JComboBox<String> comboFiltroDisciplina = new JComboBox<>();
+		comboFiltroDisciplina.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboFiltroDisciplina.setBounds(15, 90, 250, 28);
+		boletim.add(comboFiltroDisciplina);
+
+		JComboBox<String> comboFiltroSemestre = new JComboBox<>();
+		comboFiltroSemestre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboFiltroSemestre.setBounds(275, 90, 120, 28);
+		boletim.add(comboFiltroSemestre);
+
+		JButton btnFiltrarBoletim = new JButton("Filtrar");
+		btnFiltrarBoletim.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnFiltrarBoletim.setBounds(410, 90, 100, 28);
+		boletim.add(btnFiltrarBoletim);
 
 		JScrollPane scrollBoletim = new JScrollPane(tabelaBoletim);
-		scrollBoletim.setBounds(15, 95, 555, 155);
+		scrollBoletim.setBounds(15, 125, 555, 125);
 		boletim.add(scrollBoletim);
 
 		Text_Rgm_Boletim.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -443,10 +474,63 @@ public class Gui extends JFrame {
 
 				BoletimDAO dao = new BoletimDAO();
 				dao.carregarBoletim(rgm, Text_Nome_Boletim, Text_Curso_Boletim, Text_Periodo_Boletim, modeloBoletim);
+				
+				comboFiltroDisciplina.removeAllItems();
+				comboFiltroSemestre.removeAllItems();
+
+				comboFiltroDisciplina.addItem("Todas");
+				comboFiltroSemestre.addItem("Todos");
+
+				for (int i = 0; i < modeloBoletim.getRowCount(); i++) {
+
+					String disciplina = modeloBoletim.getValueAt(i, 0).toString();
+					String semestre = modeloBoletim.getValueAt(i, 1).toString();
+
+					if (((DefaultComboBoxModel<String>) comboFiltroDisciplina.getModel()).getIndexOf(disciplina) == -1) {
+						comboFiltroDisciplina.addItem(disciplina);
+					}
+
+					if (((DefaultComboBoxModel<String>) comboFiltroSemestre.getModel()).getIndexOf(semestre) == -1) {
+						comboFiltroSemestre.addItem(semestre);
+					}
+				}
 			}
 		});
+		
+		// Botão responsável por filtrar o boletim por disciplina e semestre
+		btnFiltrarBoletim.addActionListener(e -> {
 
-		// AÇÃO DO MENU ALUNO > SALVAR
+			String rgm = Text_Rgm_Boletim.getText().trim();
+
+			if (rgm.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Informe o RGM.");
+				return;
+			}
+
+			if (comboFiltroDisciplina.getSelectedItem() == null || comboFiltroSemestre.getSelectedItem() == null) {
+				JOptionPane.showMessageDialog(null, "Carregue o boletim antes de filtrar.");
+				return;
+			}
+
+			String disciplina = comboFiltroDisciplina.getSelectedItem().toString();
+			String semestre = comboFiltroSemestre.getSelectedItem().toString();
+
+			BoletimDAO dao = new BoletimDAO();
+
+			dao.carregarBoletimFiltrado1(
+				rgm,
+				disciplina,
+				semestre,
+				Text_Nome_Boletim,
+				Text_Curso_Boletim,
+				Text_Periodo_Boletim,
+				modeloBoletim
+			);
+		});
+
+		// Ação do menu aluno > salvar
+		// Cadastra o aluno no banco de dados
+		
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

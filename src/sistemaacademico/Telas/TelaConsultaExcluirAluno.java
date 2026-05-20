@@ -15,18 +15,20 @@ import sistemaacademico.Aluno;
 import sistemaacademico.DAO.AlunoDAO;
 import sistemaacademico.DAO.NotaFaltaDAO;
 
+// Tela responsável por consultar e excluir alunos
 public class TelaConsultaExcluirAluno extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	public TelaConsultaExcluirAluno() {
 
+		// Configurações principais da janela
 		setTitle("Consultar Aluno");
 		setBounds(150, 150, 750, 520);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		// Campos dos dados dos alunos
+		// Campo de busca por RGM ou CPF
 		Label lblBusca = new Label("RGM ou CPF");
 		lblBusca.setBounds(20, 20, 104, 25);
 		lblBusca.setFont(new Font("Dialog", Font.PLAIN, 16));
@@ -37,16 +39,19 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Busca.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		getContentPane().add(Text_Busca);
 
+		// Botão responsável por consultar os dados do aluno
 		JButton btnConsultar = new JButton("Consultar");
 		btnConsultar.setBounds(320, 20, 120, 28);
 		btnConsultar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		getContentPane().add(btnConsultar);
 
+		// Botão responsável por excluir o aluno consultado
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(455, 20, 100, 28);
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		getContentPane().add(btnExcluir);
 
+		// Campo RGM
 		Label lblRgm = new Label("RGM");
 		lblRgm.setBounds(20, 65, 90, 25);
 		lblRgm.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -58,6 +63,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Rgm.setEditable(false);
 		getContentPane().add(Text_Rgm);
 
+		// Campo nome
 		Label lblNome = new Label("Nome");
 		lblNome.setBounds(20, 100, 90, 25);
 		lblNome.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -69,6 +75,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Nome.setEditable(false);
 		getContentPane().add(Text_Nome);
 
+		// Campo data de nascimento
 		Label lblDataNasc = new Label("Data Nasc.");
 		lblDataNasc.setBounds(20, 135, 90, 25);
 		lblDataNasc.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -80,6 +87,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_DataNasc.setEditable(false);
 		getContentPane().add(Text_DataNasc);
 
+		// Campo CPF
 		Label lblCpf = new Label("CPF");
 		lblCpf.setBounds(350, 135, 42, 25);
 		lblCpf.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -91,6 +99,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Cpf.setEditable(false);
 		getContentPane().add(Text_Cpf);
 
+		// Campo email
 		Label lblEmail = new Label("Email");
 		lblEmail.setBounds(20, 170, 90, 25);
 		lblEmail.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -102,6 +111,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Email.setEditable(false);
 		getContentPane().add(Text_Email);
 
+		// Campo endereço
 		Label lblEndereco = new Label("Endereço");
 		lblEndereco.setBounds(20, 205, 90, 25);
 		lblEndereco.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -113,6 +123,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Endereco.setEditable(false);
 		getContentPane().add(Text_Endereco);
 
+		// Campo município
 		Label lblMunicipio = new Label("Município");
 		lblMunicipio.setBounds(20, 240, 90, 25);
 		lblMunicipio.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -124,6 +135,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Municipio.setEditable(false);
 		getContentPane().add(Text_Municipio);
 
+		// Campo UF
 		Label lblUf = new Label("UF");
 		lblUf.setBounds(360, 240, 40, 25);
 		lblUf.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -135,6 +147,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Uf.setEditable(false);
 		getContentPane().add(Text_Uf);
 
+		// Campo celular
 		Label lblCelular = new Label("Celular");
 		lblCelular.setBounds(520, 240, 60, 25);
 		lblCelular.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -146,6 +159,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Celular.setEditable(false);
 		getContentPane().add(Text_Celular);
 
+		// Campo curso
 		Label lblCurso = new Label("Curso");
 		lblCurso.setBounds(20, 275, 90, 25);
 		lblCurso.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -157,6 +171,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Curso.setEditable(false);
 		getContentPane().add(Text_Curso);
 
+		// Campo período
 		Label lblPeriodo = new Label("Período");
 		lblPeriodo.setBounds(530, 275, 60, 25);
 		lblPeriodo.setFont(new Font("Dialog", Font.PLAIN, 14));
@@ -168,20 +183,24 @@ public class TelaConsultaExcluirAluno extends JFrame {
 		Text_Periodo.setEditable(false);
 		getContentPane().add(Text_Periodo);
 
+		// Modelo da tabela que exibirá as disciplinas, notas e faltas do aluno
 		DefaultTableModel modelo = new DefaultTableModel();
 		modelo.addColumn("Disciplina");
 		modelo.addColumn("Semestre");
 		modelo.addColumn("Nota");
 		modelo.addColumn("Faltas");
 
+		// Tabela de notas e faltas
 		JTable tabela = new JTable(modelo);
 		tabela.setRowHeight(24);
 
+		// Barra de rolagem da tabela
 		JScrollPane scroll = new JScrollPane(tabela);
 		scroll.setBounds(20, 325, 690, 130);
 		getContentPane().add(scroll);
 
-		// Botão para consultar os dados
+		// Ação do botão Consultar
+		// Busca o aluno pelo RGM ou CPF e exibe seus dados e notas
 		btnConsultar.addActionListener(e -> {
 
 			String busca = Text_Busca.getText().trim();
@@ -194,6 +213,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 			AlunoDAO alunoDAO = new AlunoDAO();
 			Aluno aluno = alunoDAO.buscarPorRgmOuCpf(busca);
 
+			// Limpa a tabela antes de carregar novas notas
 			modelo.setRowCount(0);
 
 			if (aluno != null) {
@@ -209,6 +229,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 				Text_Curso.setText(aluno.getCurso());
 				Text_Periodo.setText(aluno.getPeriodo());
 
+				// Carrega as notas e faltas do aluno na tabela
 				NotaFaltaDAO notaDAO = new NotaFaltaDAO();
 				notaDAO.carregarNotasNaTabela(aluno.getRgm(), modelo);
 
@@ -217,7 +238,9 @@ public class TelaConsultaExcluirAluno extends JFrame {
 			}
 		});
 
-		// Botão para excluir os dados
+		// Ação do botão Excluir
+		// Exclui o aluno consultado e, por causa do ON DELETE CASCADE,
+		// as notas/faltas ligadas a ele também são removidas
 		btnExcluir.addActionListener(e -> {
 
 			String rgm = Text_Rgm.getText().trim();
@@ -227,6 +250,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 				return;
 			}
 
+			// Confirmação antes de excluir definitivamente
 			int opcao = JOptionPane.showConfirmDialog(null,
 					"Deseja realmente excluir este aluno?\nAs notas e faltas também serão excluídas.",
 					"Confirmar exclusão", JOptionPane.YES_NO_OPTION);
@@ -238,6 +262,7 @@ public class TelaConsultaExcluirAluno extends JFrame {
 			AlunoDAO alunoDAO = new AlunoDAO();
 			boolean excluiu = alunoDAO.excluirPorRgm(rgm);
 
+			// Se excluiu com sucesso, limpa todos os campos e a tabela
 			if (excluiu) {
 				Text_Busca.setText("");
 				Text_Rgm.setText("");

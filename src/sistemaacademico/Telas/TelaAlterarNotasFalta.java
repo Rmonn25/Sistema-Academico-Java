@@ -11,18 +11,20 @@ import javax.swing.JOptionPane;
 
 import sistemaacademico.DAO.NotaFaltaDAO;
 
+// Tela responsável por alterar notas e faltas de um aluno
 public class TelaAlterarNotasFalta extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
 	public TelaAlterarNotasFalta() {
 
+		// Configurações principais da janela
 		setTitle("Alterar Notas e Faltas");
 		setBounds(150, 150, 620, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		// Campos dos dados dos alunos
+		// Campo de busca por RGM ou CPF
 		Label lblBusca = new Label("RGM ou CPF");
 		lblBusca.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblBusca.setBounds(20, 20, 90, 25);
@@ -32,14 +34,17 @@ public class TelaAlterarNotasFalta extends JFrame {
 		Text_Busca.setBounds(120, 20, 160, 28);
 		getContentPane().add(Text_Busca);
 
+		// Botão responsável por buscar o aluno
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(300, 20, 100, 28);
 		getContentPane().add(btnBuscar);
 
+		// Botão responsável por alterar nota e faltas
 		JButton btnAlterar = new JButton("Alterar");
 		btnAlterar.setBounds(420, 20, 100, 28);
 		getContentPane().add(btnAlterar);
 
+		// Campo nome do aluno
 		Label lblNome = new Label("Nome");
 		lblNome.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblNome.setBounds(20, 65, 90, 25);
@@ -51,6 +56,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 		Text_Nome.setEditable(false);
 		getContentPane().add(Text_Nome);
 
+		// Campo período do aluno
 		Label lblPeriodo = new Label("Período");
 		lblPeriodo.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblPeriodo.setBounds(20, 100, 90, 25);
@@ -62,6 +68,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 		Text_Periodo.setEditable(false);
 		getContentPane().add(Text_Periodo);
 
+		// ComboBox com as disciplinas cadastradas para o aluno
 		Label lblDisciplina = new Label("Disciplina");
 		lblDisciplina.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblDisciplina.setBounds(20, 135, 90, 25);
@@ -72,6 +79,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 		comboDisciplina.setBounds(120, 135, 360, 28);
 		getContentPane().add(comboDisciplina);
 
+		// Campo semestre
 		Label lblSemestre = new Label("Semestre");
 		lblSemestre.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblSemestre.setBounds(20, 180, 90, 25);
@@ -82,6 +90,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 		Text_Semestre.setBounds(120, 180, 120, 28);
 		getContentPane().add(Text_Semestre);
 
+		// Campo nota
 		Label lblNota = new Label("Nota");
 		lblNota.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblNota.setBounds(270, 180, 50, 25);
@@ -92,6 +101,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 		Text_Nota.setBounds(320, 180, 70, 28);
 		getContentPane().add(Text_Nota);
 
+		// Campo faltas
 		Label lblFaltas = new Label("Faltas");
 		lblFaltas.setFont(new Font("Dialog", Font.PLAIN, 14));
 		lblFaltas.setBounds(410, 180, 60, 25);
@@ -102,9 +112,12 @@ public class TelaAlterarNotasFalta extends JFrame {
 		Text_Faltas.setBounds(470, 180, 70, 28);
 		getContentPane().add(Text_Faltas);
 
+		// Array usado para guardar o RGM encontrado na busca
+		// Foi usado array porque variáveis usadas dentro de lambda precisam ser finais ou efetivamente finais
 		final String[] rgmEncontrado = new String[1];
 
-		// Botão para buscar os dados
+		// Ação do botão Buscar
+		// Busca o aluno por RGM ou CPF e carrega suas disciplinas
 		btnBuscar.addActionListener(e -> {
 
 			String busca = Text_Busca.getText().trim();
@@ -114,6 +127,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 				return;
 			}
 
+			// Limpa os campos antes de carregar uma nova busca
 			comboDisciplina.removeAllItems();
 			Text_Semestre.setText("");
 			Text_Nota.setText("");
@@ -121,6 +135,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 
 			NotaFaltaDAO dao = new NotaFaltaDAO();
 
+			// Busca dados básicos do aluno
 			String[] aluno = dao.buscarAlunoParaNotas(busca);
 
 			if (aluno != null) {
@@ -128,6 +143,7 @@ public class TelaAlterarNotasFalta extends JFrame {
 				Text_Nome.setText(aluno[1]);
 				Text_Periodo.setText(aluno[2]);
 
+				// Lista as disciplinas que possuem nota/faltas cadastradas para o aluno
 				String[] disciplinas = dao.listarDisciplinasPorRgm(rgmEncontrado[0]);
 
 				for (String disciplina : disciplinas) {
@@ -141,6 +157,8 @@ public class TelaAlterarNotasFalta extends JFrame {
 			}
 		});
 
+		// Ação executada quando uma disciplina é selecionada no ComboBox
+		// Carrega semestre, nota e faltas da disciplina selecionada
 		comboDisciplina.addActionListener(e -> {
 
 			if (comboDisciplina.getSelectedItem() == null || rgmEncontrado[0] == null) {
@@ -160,7 +178,8 @@ public class TelaAlterarNotasFalta extends JFrame {
 			}
 		});
 
-		// Botão para alterar os dados
+		// Ação do botão Alterar
+		// Envia os dados alterados para o DAO atualizar no banco de dados
 		btnAlterar.addActionListener(e -> {
 
 			try {

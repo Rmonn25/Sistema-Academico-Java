@@ -1,7 +1,9 @@
 package sistemaacademico;
 
+// Classe modelo que representa um aluno no sistema
 public class Aluno {
 
+	// Atributos do aluno
 	private String rgm;
 	private String nome;
 	private String dataNasc;
@@ -15,8 +17,7 @@ public class Aluno {
 	private String campus;
 	private String periodo;
 
-	// Construtores
-
+	// Construtor responsável por criar um objeto Aluno com todos os dados preenchidos
 	public Aluno(String rgm, String nome, String dataNasc, String cpf, String email, String endereco, String municipio,
 			String uf, String celular, String curso, String campus, String periodo) {
 		this.rgm = rgm;
@@ -33,7 +34,7 @@ public class Aluno {
 		this.periodo = periodo;
 	}
 
-	// getters / setters
+	// Métodos getters e setters
 
 	public String getRgm() {
 		return rgm;
